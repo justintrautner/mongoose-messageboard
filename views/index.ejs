@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Message Board</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h1>The Dojo Message Board</h1>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form action="/message" method="post">
+                <h5>Name:</h5>
+                <input type="text" name="name">
+                <h5>Message:</h5>
+                <textarea name="content" cols="50"></textarea>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <input type="submit" class="btn btn-outline-info" value="Post Message">
+            </form>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <% for (var i in messages){ %>
+               <h4> Name: <%= messages[i].name %></h4>
+               <h5> Message: <%= messages[i].content %> </h5>
+               <p><%= messages[i]._id %></p>
+               <% for(var c=0;c< messages[i].comments.length;c++) { %>
+                <p>Name: <%= messages[i].comments[c].name %></p>
+               <p> Comment: <%= messages[i].comments[c].content %></p>
+               <% } %>
+               <form action="/comment/<%= messages[i]._id %>" method="post">
+               <p>Name:<input type="text" name="name"></p>
+               <p>Comment:</p>
+               <textarea name="content" cols="30"></textarea>
+               <p><input type="submit" value="Post Comment" class="btn btn-outline-warning"></p>
+               <hr>
+               
+                <% } %>
+               </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</body>
+
+</html>
